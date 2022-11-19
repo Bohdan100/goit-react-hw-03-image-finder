@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import '../../styles/styles.css';
 
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import {
+  SearchbarContainer,
+  SearchForm,
+  SearchFormBtn,
+  SearchFormBtnLabel,
+  SearchFormInput,
+} from './SearchResult.styled';
 
 export default class Searchbar extends Component {
   state = {
@@ -32,14 +39,13 @@ export default class Searchbar extends Component {
     const { searchName } = this.state;
     return (
       <>
-        <header className="Searchbar">
-          <form onSubmit={this.handleSubmit} className="SearchForm">
-            <button type="submit" className="SearchForm-button">
-              <span className="SearchForm-button-label">Search</span>
-            </button>
+        <SearchbarContainer>
+          <SearchForm onSubmit={this.handleSubmit}>
+            <SearchFormBtn type="submit">
+              <SearchFormBtnLabel>Search</SearchFormBtnLabel>
+            </SearchFormBtn>
 
-            <input
-              className="SearchForm-input"
+            <SearchFormInput
               type="text"
               autoComplete="off"
               autoFocus
@@ -48,8 +54,8 @@ export default class Searchbar extends Component {
               value={searchName}
               onChange={this.handleNameChange}
             />
-          </form>
-        </header>
+          </SearchForm>
+        </SearchbarContainer>
 
         <ToastContainer
           autoClose={2000}

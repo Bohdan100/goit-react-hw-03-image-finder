@@ -10,6 +10,8 @@ import Loader from './interfaceEl/Loader';
 import Button from './interfaceEl/Button';
 import Modal from './interfaceEl/Modal';
 
+import { IdleText } from './SearchResult.styled';
+
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -127,7 +129,9 @@ export default class SearchResult extends Component {
       <>
         <Searchbar onSubmit={this.handleSearchbarSubmit} />
 
-        {status === Status.IDLE && <div>Search images and photos</div>}
+        {status === Status.IDLE && (
+          <IdleText>Search images and photos</IdleText>
+        )}
         {status === Status.PENDING && (
           <Loader images={images} onClick={this.handleClickFromItem} />
         )}

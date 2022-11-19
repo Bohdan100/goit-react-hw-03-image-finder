@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../../../styles/styles.css';
+
+import { BtnLoadMore } from '../SearchResult.styled';
 
 const Button = ({ loadMore }) => {
   return (
-    <button type="button" className="Button" onClick={loadMore}>
+    <BtnLoadMore type="button" className="Button" onClick={loadMore}>
       Load more
-    </button>
+    </BtnLoadMore>
   );
 };
 

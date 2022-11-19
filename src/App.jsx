@@ -1,17 +1,19 @@
+import { ThemeProvider } from 'styled-components';
+import { theme } from './components/constants/theme';
+import { GlobalStyle } from './GlobalStyle';
+
+import { AppContainer } from './App.styled';
+
 import SearchResult from './components/Searchbar/SearchResult';
 import './styles/styles.css';
 
 export const App = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <SearchResult />
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <AppContainer>
+        <SearchResult />
+      </AppContainer>
+    </ThemeProvider>
   );
 };

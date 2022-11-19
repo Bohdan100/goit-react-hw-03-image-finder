@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import '../../../styles/styles.css';
+import { ImageGalleryCard, Image } from '../SearchResult.styled';
 
 export class ImageGalleryItem extends Component {
   handleClick = event => {
@@ -14,14 +14,14 @@ export class ImageGalleryItem extends Component {
   render() {
     const { largeImageURL, tags } = this.props;
     return (
-      <li className="ImageGalleryItem">
-        <img
+      <ImageGalleryCard>
+        <Image
           src={largeImageURL}
           alt={tags}
           onClick={this.handleClick}
           name={largeImageURL}
         />
-      </li>
+      </ImageGalleryCard>
     );
   }
 }

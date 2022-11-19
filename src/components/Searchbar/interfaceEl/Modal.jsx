@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-
 import { createPortal } from 'react-dom';
-import '../../../styles/styles.css';
+
+import {
+  Overlay,
+  ModalWindow,
+  ModalFormBtn,
+  ModalFormBtnLabel,
+} from '../SearchResult.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -31,14 +36,14 @@ export default class Modal extends Component {
   render() {
     const { src, onClose } = this.props;
     return createPortal(
-      <div className="Overlay" onClick={this.handleBackdropClick}>
-        <div className="Modal">
+      <Overlay onClick={this.handleBackdropClick}>
+        <ModalWindow>
           <img src={src} alt="" />
-          <button type="submit" className="ModalForm-button" onClick={onClose}>
-            <span className="ModalForm-button-label">Search</span>
-          </button>
-        </div>
-      </div>,
+          <ModalFormBtn type="submit" onClick={onClose}>
+            <ModalFormBtnLabel>Search</ModalFormBtnLabel>
+          </ModalFormBtn>
+        </ModalWindow>
+      </Overlay>,
       modalRoot
     );
   }
