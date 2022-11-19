@@ -1,12 +1,10 @@
 export const theme = {
   colors: {
-    indigo: '#3f51b5',
-    indigoAccent: '#303f9f',
-    red: '#f44336',
-    redAccent: '#d32f2f',
     green: '#4caf50',
     black: '#2a2a2a',
     white: '#fff',
+    blue: '#3f51b5',
+    blueAccent: '#303f9f',
   },
 
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
@@ -17,7 +15,7 @@ export const theme = {
   },
 
   fontSizes: {
-    xs: '14px',
+    xs: '18px',
     s: '20px',
     m: '24px',
     l: '28px',
@@ -36,13 +34,12 @@ export const theme = {
   },
 
   borders: {
-    none: 'none',
-    normal: '1px solid',
+    none: 0,
   },
 
   radius: {
     none: '0',
-    normal: '4px',
-    round: '50%',
+    normal: '2px',
+    smart: '3px',
   },
 };

@@ -6,17 +6,17 @@ export const ImageGalleryList = styled.ul`
   display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  grid-gap: 16px;
+  grid-gap: ${p => p.theme.space[4]}px;
   margin-top: 0;
   margin-bottom: 0;
-  padding: 0;
+  padding: ${p => p.theme.space[0]}px;
   list-style: none;
   margin-left: auto;
   margin-right: auto;
 `;
 
 export const ImageGalleryCard = styled.li`
-  border-radius: 2px;
+  border-radius: ${p => p.theme.radius.normal};
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 `;
@@ -36,30 +36,30 @@ export const Image = styled.img`
 
 export const BtnLoadMore = styled.button`
   margin-top: 10px;
-  padding: 8px 16px;
-  border-radius: 2px;
-  background-color: #3f51b5;
+  padding: ${p => p.theme.space[4]}px;
+  border-radius: ${p => p.theme.radius.normal};
+  background-color: ${p => p.theme.colors.blue};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  color: #fff;
-  border: 0;
+  color: ${p => p.theme.colors.white};
+  border: ${p => p.theme.borders.none};
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: ${p => p.theme.fontSizes.xs};
+  line-height: ${p => p.theme.fontSizes.m};
   font-style: normal;
-  font-weight: 500;
+  font-weight: ${p => p.theme.fontWeights.middle};
   min-width: 180px;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
   :hover,
   :focus {
-    background-color: #303f9f;
+    background-color: ${p => p.theme.colors.blueAccent};
   }
 `;
 
@@ -94,20 +94,16 @@ export const ModalWindow = styled.div`
 `;
 
 export const ModalFormBtn = styled.button`
-  background-image: url('../../icons/cross.png');
   position: absolute;
   top: 6%;
   right: 16.65%;
-  background-color: #3f51b5;
+  background-color: ${p => p.theme.colors.blue};
 
   display: inline-block;
   width: 48px;
   height: 48px;
   border: 0;
 
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
@@ -127,6 +123,8 @@ export const ModalFormIcon = styled.svg`
   height: 32px;
   xmlns: http://www.w3.org/2000/svg;
   opacity: 0.6;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
 
   :hover,
   :focus {
@@ -134,18 +132,16 @@ export const ModalFormIcon = styled.svg`
   }
 `;
 
-//    viewBox="0 0 32 32"
-
 export const ModalFormBtnLabel = styled.span`
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
+  padding: ${p => p.theme.space[0]}px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   clip-path: inset(50%);
-  border: 0;
+  border: ${p => p.theme.borders.none};
 `;
 
 // ============ Searchbar ===================
@@ -163,7 +159,7 @@ export const SearchbarContainer = styled.header`
   padding-top: 12px;
   padding-bottom: 12px;
   color: #fff;
-  background-color: #3f51b5;
+  background-color: ${p => p.theme.colors.blue};
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `;
@@ -173,8 +169,8 @@ export const SearchForm = styled.form`
   align-items: center;
   width: 100%;
   max-width: 600px;
-  background-color: #fff;
-  border-radius: 3px;
+  background-color: ${p => p.theme.colors.white};
+  border-radius: ${p => p.theme.radius.smart};
   overflow: hidden;
 `;
 
@@ -182,7 +178,7 @@ export const SearchFormBtn = styled.button`
   display: inline-block;
   width: 48px;
   height: 48px;
-  border: 0;
+  border: ${p => p.theme.borders.none};
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
@@ -218,21 +214,21 @@ export const SearchFormBtnLabel = styled.span`
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   clip-path: inset(50%);
-  border: 0;
+  border: ${p => p.theme.borders.none};
 `;
 
 export const SearchFormInput = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;
-  font-size: 20px;
-  border: none;
+  font-size: ${p => p.theme.fontSizes.s};
+  border: ${p => p.theme.borders.none};
   outline: none;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: ${p => p.theme.space[2]}px;
+  padding-right: ${p => p.theme.space[2]}px;
 
   ::placeholder {
     font: inherit;
-    font-size: 18px;
+    font-size: ${p => p.theme.fontSizes.xs};
   }
 `;
