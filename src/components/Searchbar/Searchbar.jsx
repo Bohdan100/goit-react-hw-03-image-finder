@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
@@ -14,6 +15,8 @@ import {
 } from './SearchResult.styled';
 
 export default class Searchbar extends Component {
+  static onSubmit = PropTypes.func.isRequired;
+
   state = {
     searchName: '',
   };

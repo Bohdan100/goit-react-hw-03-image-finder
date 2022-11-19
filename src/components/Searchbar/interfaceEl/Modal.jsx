@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import {
@@ -12,6 +13,9 @@ import {
 const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
+  static onClose = PropTypes.func.isRequired;
+  static src = PropTypes.string.isRequired;
+
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }

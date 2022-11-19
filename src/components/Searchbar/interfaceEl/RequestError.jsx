@@ -1,6 +1,7 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PropTypes from 'prop-types';
 
 export default function RequestError({ message }) {
   return (
@@ -14,5 +15,5 @@ export default function RequestError({ message }) {
 }
 
 RequestError.propTypes = {
-  message: PropTypes.string,
+  message: PropTypes.string.isRequired,
 };

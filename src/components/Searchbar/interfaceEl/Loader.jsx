@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { Watch } from 'react-loader-spinner';
+
 import ImageGallery from '../ImageGallery/ImageGallery';
 
 export default function Loader({ images, onClick }) {
@@ -22,3 +24,14 @@ export default function Loader({ images, onClick }) {
     </div>
   );
 }
+
+Loader.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ),
+  onClick: PropTypes.func.isRequired,
+};
