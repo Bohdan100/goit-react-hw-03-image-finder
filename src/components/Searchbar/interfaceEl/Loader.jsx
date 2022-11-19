@@ -1,17 +1,11 @@
-// СКЕЛЕТОН - СПИНЕР - ОЖИДАНИЕ - СТАДИЯ ЗАГРУЗКИ ДАННЫХ С БЕКЕНДА
-
-// Выбираем вид спинера Watch из react-loader-spinner
 import { Watch } from 'react-loader-spinner';
 import ImageGallery from '../ImageGallery/ImageGallery';
 
-export default function Loader({ searchName }) {
-  // const images = {
-  //   name: searchName,
-  // };
+export default function Loader({ images, onClick }) {
   return (
     <div role="alert">
       <div>
-        {/* Параметры спинера Watch */}
+        {/* Params spinner Watch */}
         <Watch
           height="80"
           width="80"
@@ -24,8 +18,7 @@ export default function Loader({ searchName }) {
         />
         Loading...
       </div>
-      {/* ЗАКИДЫВАЕМ СЮДА ImageGallery И РЕНДЕРИМ В НЕМ галерею */}
-      {/* <ImageGallery images={images} /> */}
+      {images.length > 0 && <ImageGallery images={images} onClick={onClick} />}
     </div>
   );
 }

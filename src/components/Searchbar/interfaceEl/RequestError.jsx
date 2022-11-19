@@ -1,13 +1,10 @@
-// библиотека react-toastify для окон с ошибками
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
-// ожидает проп - message - заходит сообщение об ошибке error.message
 export default function RequestError({ message }) {
   return (
-    // role="alert" - для читалок, как aria-label
     <div role="alert">
-      {/* фото кота при ошибке, импортировано из './error.jpg' */}
       {toast.error(
         'An error occurred while searching for your query. Try to refine your search keyword.'
       )}
@@ -15,3 +12,7 @@ export default function RequestError({ message }) {
     </div>
   );
 }
+
+RequestError.propTypes = {
+  message: PropTypes.string,
+};

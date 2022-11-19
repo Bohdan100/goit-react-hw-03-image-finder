@@ -7,7 +7,7 @@ import fetchImages from './apiRequest/apiRequest';
 import ImageGallery from './ImageGallery/ImageGallery';
 import RequestError from './interfaceEl/RequestError';
 import Loader from './interfaceEl/Loader';
-import { Button } from './interfaceEl/Button';
+import Button from './interfaceEl/Button';
 import Modal from './interfaceEl/Modal';
 
 const Status = {
@@ -34,27 +34,56 @@ export default class SearchResult extends Component {
     const prevPage = prevState.page;
     const nextPage = this.state.page;
 
-    const imagesArray = this.state.images;
-
     if (prevName !== nextName || prevPage !== nextPage) {
       fetchImages(nextName, nextPage)
-        .then(response => response.hits)
-        .then(requestImages => {
-          if (imagesArray.length === 0) {
-            toast.info('🦄 No images found for your search word!');
+        .then(response => [response.hits, response.total])
+        .then(([requestImages, allImages]) => {
+          ///
+          if (requestImages.length === 0) {
+            toast.info('🦄 No images found for your search query!');
+            this.setState({ status: Status.IDLE });
           }
-          if (nextPage === 1) {
-            this.setState(prevState => ({
-              ...prevState,
-              status: Status.RESOLVED,
-              images: [...requestImages],
-            }));
-          } else {
-            this.setState(prevState => ({
-              ...prevState,
-              status: Status.RESOLVED,
-              images: [...prevState.images, ...requestImages],
-            }));
+          ////////////////////////
+          else {
+            if (nextPage === 1) {
+              if (requestImages.length === allImages) {
+                toast.success(
+                  `Only 🦄 ${requestImages.length} images found for your search query. No other images found !`
+                );
+              }
+              ///
+              else {
+                toast.success(
+                  `First 🦄 ${requestImages.length} images found for your search query!`
+                );
+              }
+              ///
+              this.setState(prevState => ({
+                ...prevState,
+                status: Status.RESOLVED,
+                images: [...requestImages],
+              }));
+            }
+            /////////////////////////
+            else {
+              if (requestImages.length === allImages) {
+                toast.success(
+                  `🦄 You have uploaded ALL ${requestImages.length} available images for your search query. No other images found !`
+                );
+              }
+              ///
+              else {
+                toast.success(
+                  `🦄 Next ${requestImages.length} images found for your search query!`
+                );
+              }
+              ///
+              this.setState(prevState => ({
+                ...prevState,
+                status: Status.RESOLVED,
+                images: [...prevState.images, ...requestImages],
+              }));
+            }
           }
         })
         .catch(error => this.setState({ error, status: Status.PENDING }));
@@ -66,7 +95,7 @@ export default class SearchResult extends Component {
       toast.info('🦄 You entered the previous search word!');
       return;
     }
-    console.log('Сработал handleSearchbarSubmit');
+
     this.setState({
       page: 1,
       searchName: newSearchName,
@@ -92,13 +121,16 @@ export default class SearchResult extends Component {
   };
 
   render() {
-    const { searchName, images, error, status } = this.state;
+    const { images, error, status } = this.state;
 
     return (
       <>
         <Searchbar onSubmit={this.handleSearchbarSubmit} />
+
         {status === Status.IDLE && <div>Search images and photos</div>}
-        {status === Status.PENDING && <Loader searchName={searchName} />}
+        {status === Status.PENDING && (
+          <Loader images={images} onClick={this.handleClickFromItem} />
+        )}
         {status === Status.REJECTED && <RequestError message={error.message} />}
         {status === Status.RESOLVED && (
           <>
@@ -113,5 +145,3 @@ export default class SearchResult extends Component {
     );
   }
 }
-
-// onSubmit={newSearchName => this.handleSearchbarSubmit(newSearchName)}

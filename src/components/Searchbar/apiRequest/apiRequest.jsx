@@ -9,7 +9,6 @@ const fetchImages = (name, page) => {
     `${BASE_URL}/?key=${API_key}&q=${name}&${image_type}&${orientation}&${safesearch}&page=${page}&per_page=12`
   ).then(response => {
     if (response.ok) {
-      // console.log('response', response);
       return response.json();
     }
 
