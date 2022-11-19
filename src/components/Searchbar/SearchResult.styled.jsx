@@ -94,7 +94,7 @@ export const ModalWindow = styled.div`
 `;
 
 export const ModalFormBtn = styled.button`
-  background-image: url('../icons/cross.png');
+  background-image: url('../../icons/cross.png');
   position: absolute;
   top: 6%;
   right: 16.65%;
@@ -118,6 +118,23 @@ export const ModalFormBtn = styled.button`
     opacity: 1;
   }
 `;
+
+export const ModalFormIcon = styled.svg`
+  stroke: currentColor;
+  fill: currentColor;
+  stroke-width: 0;
+  width: 32px;
+  height: 32px;
+  xmlns: http://www.w3.org/2000/svg;
+  opacity: 0.6;
+
+  :hover,
+  :focus {
+    opacity: 1;
+  }
+`;
+
+//    viewBox="0 0 32 32"
 
 export const ModalFormBtnLabel = styled.span`
   position: absolute;
@@ -162,20 +179,29 @@ export const SearchForm = styled.form`
 `;
 
 export const SearchFormBtn = styled.button`
-  background-image: url('../icons/search.png');
-
   display: inline-block;
   width: 48px;
   height: 48px;
   border: 0;
-
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
+
+  :hover,
+  :focus {
+    opacity: 1;
+  }
+`;
+
+export const SearchFormIcon = styled.svg`
+  stroke: currentColor;
+  fill: currentColor;
+  stroke-width: 0;
+  width: 16px;
+  height: 16px;
+  xmlns: http://www.w3.org/2000/svg;
+  opacity: 0.6;
 
   :hover,
   :focus {
@@ -210,6 +236,3 @@ export const SearchFormInput = styled.input`
     font-size: 18px;
   }
 `;
-
-/* https://image.flaticon.com/icons/svg/149/149852.svg  - адрес иконки */
-/* background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg'); */

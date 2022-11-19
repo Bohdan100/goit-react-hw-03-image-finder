@@ -5,7 +5,6 @@ import { GlobalStyle } from './GlobalStyle';
 import { AppContainer } from './App.styled';
 
 import SearchResult from './components/Searchbar/SearchResult';
-import './styles/styles.css';
 
 export const App = () => {
   return (
