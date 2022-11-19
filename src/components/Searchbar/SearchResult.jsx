@@ -29,12 +29,38 @@ export default class SearchResult extends Component {
     largeImage: '',
   };
 
+  componentDidMount() {
+    const prevName = localStorage.getItem('SearchQuerry');
+    const prevParsedName = JSON.parse(prevName);
+
+    if (prevParsedName) {
+      this.setState({ searchName: prevParsedName });
+    }
+
+    const prevPage = localStorage.getItem('Page');
+    const prevParsedPage = JSON.parse(prevPage);
+
+    if (prevParsedPage) {
+      this.setState({ page: prevParsedPage });
+    }
+
+    const prevImages = localStorage.getItem('Images');
+    const prevParsedImages = JSON.parse(prevImages);
+
+    if (prevParsedImages) {
+      this.setState({ images: prevParsedImages, status: Status.RESOLVED });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const prevName = prevState.searchName;
     const nextName = this.state.searchName;
 
     const prevPage = prevState.page;
     const nextPage = this.state.page;
+
+    const prevImages = prevState.images;
+    const nextImages = this.state.images;
 
     if (prevName !== nextName || prevPage !== nextPage) {
       fetchImages(nextName, nextPage)
@@ -89,6 +115,19 @@ export default class SearchResult extends Component {
           }
         })
         .catch(error => this.setState({ error, status: Status.PENDING }));
+    }
+
+    // ============ LOCAL STORAGE ====================
+    if (nextName !== prevName) {
+      localStorage.setItem('SearchQuerry', JSON.stringify(nextName));
+    }
+
+    if (nextPage !== prevPage) {
+      localStorage.setItem('Page', JSON.stringify(nextPage));
+    }
+
+    if (nextImages !== prevImages) {
+      localStorage.setItem('Images', JSON.stringify(nextImages));
     }
   }
 

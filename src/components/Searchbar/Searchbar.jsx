@@ -18,6 +18,24 @@ export default class Searchbar extends Component {
     searchName: '',
   };
 
+  componentDidMount() {
+    const prevSearchName = localStorage.getItem('SearchName');
+    const prevParsedSearchName = JSON.parse(prevSearchName);
+
+    if (prevParsedSearchName) {
+      this.setState({ searchName: prevParsedSearchName });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const nextSearchName = this.state.searchName;
+    const prevSearchName = prevState.searchName;
+
+    if (nextSearchName !== prevSearchName) {
+      localStorage.setItem('SearchName', JSON.stringify(nextSearchName));
+    }
+  }
+
   handleNameChange = event => {
     this.setState({
       searchName: event.currentTarget.value.trim().toLowerCase(),
