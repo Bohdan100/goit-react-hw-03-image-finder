@@ -1,4 +1,9 @@
 export const theme = {
+  display: {
+    grid: 'grid',
+    flex: 'flex',
+  },
+
   colors: {
     green: '#4caf50',
     black: '#2a2a2a',
@@ -8,6 +13,7 @@ export const theme = {
   },
 
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+
   fonts: {
     body: 'system-ui, sans-serif',
     heading: 'system-ui, sans-serif',
@@ -41,5 +47,15 @@ export const theme = {
     none: '0',
     normal: '2px',
     smart: '3px',
+  },
+
+  position: {
+    center: 'center',
+    auto: 'auto',
+
+    absolute: 'absolute',
+    fixed: 'fixed',
+    relative: 'relative',
+    sticky: 'sticky',
   },
 };

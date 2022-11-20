@@ -1,9 +1,10 @@
 // Разметка галереи изображений по http-запросу
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { theme } from '../../constants/theme';
 
 import { ImageGalleryItem } from './ImageGalleryItem';
-import { ImageGalleryList } from '../SearchResult.styled';
+import { Box } from '../SearchResult.styled';
 
 export default class ImageGallery extends Component {
   static onClick = PropTypes.func.isRequired;
@@ -22,7 +23,7 @@ export default class ImageGallery extends Component {
   render() {
     const { images } = this.props;
     return (
-      <ImageGalleryList>
+      <Box mt={0} mb={0} p={0} ml="auto" mr="auto" bg={theme.colors.white}>
         {images.map(({ id, largeImageURL, tags }) => (
           <ImageGalleryItem
             key={id}
@@ -31,7 +32,7 @@ export default class ImageGallery extends Component {
             onClick={this.handleClickFromItem}
           />
         ))}
-      </ImageGalleryList>
+      </Box>
     );
   }
 }

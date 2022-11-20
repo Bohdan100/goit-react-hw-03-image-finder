@@ -1,18 +1,17 @@
 import styled from 'styled-components';
+import { space, layout, color } from 'styled-system';
+// npm i styled-system styled-components
 
 // ============ ImageGalleryList ===================
 
-export const ImageGalleryList = styled.ul`
-  display: grid;
+// ImageGalleryList = Box
+export const Box = styled.ul`
+  ${space} ${layout} ${color} 
+  display: ${p => p.theme.display.grid};
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap: ${p => p.theme.space[4]}px;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: ${p => p.theme.space[0]}px;
   list-style: none;
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 export const ImageGalleryCard = styled.li`
@@ -22,7 +21,7 @@ export const ImageGalleryCard = styled.li`
 `;
 
 export const Image = styled.img`
-  position: relative;
+  position: ${p => p.theme.position.relative};
   width: 100%;
   height: 260px;
   object-fit: cover;
@@ -40,10 +39,10 @@ export const BtnLoadMore = styled.button`
   border-radius: ${p => p.theme.radius.normal};
   background-color: ${p => p.theme.colors.blue};
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
+  text-align: ${p => p.theme.position.center};
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: ${p => p.theme.position.auto};
+  margin-right: ${p => p.theme.position.auto};
   color: ${p => p.theme.colors.white};
   border: ${p => p.theme.borders.none};
   text-decoration: none;
@@ -65,7 +64,7 @@ export const BtnLoadMore = styled.button`
 
 export const IdleText = styled.div`
   margin-top: 30px;
-  text-align: center;
+  text-align: ${p => p.theme.position.center};
 
   font-size: ${props => props.theme.fontSizes.s};
   line-height: ${props => props.theme.lineHeights.heading};
@@ -76,14 +75,14 @@ export const IdleText = styled.div`
 // ============ ModalWindow ===================
 
 export const Overlay = styled.div`
-  position: fixed;
+  position: ${p => p.theme.position.fixed};
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: ${p => p.theme.display.flex};
+  justify-content: ${p => p.theme.position.center};
+  align-items: ${p => p.theme.position.center};
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1200;
 `;
@@ -94,7 +93,7 @@ export const ModalWindow = styled.div`
 `;
 
 export const ModalFormBtn = styled.button`
-  position: absolute;
+  position: ${p => p.theme.position.absolute};
   top: 6%;
   right: 16.65%;
   background-color: ${p => p.theme.colors.blue};
@@ -102,7 +101,7 @@ export const ModalFormBtn = styled.button`
   display: inline-block;
   width: 48px;
   height: 48px;
-  border: 0;
+  border: ${p => p.theme.borders.none};
 
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -133,7 +132,7 @@ export const ModalFormIcon = styled.svg`
 `;
 
 export const ModalFormBtnLabel = styled.span`
-  position: absolute;
+  position: ${p => p.theme.position.absolute};
   width: 1px;
   height: 1px;
   padding: ${p => p.theme.space[0]}px;
@@ -148,25 +147,25 @@ export const ModalFormBtnLabel = styled.span`
 export const SearchbarContainer = styled.header`
   top: 0;
   left: 0;
-  position: sticky;
+  position: ${p => p.theme.position.sticky};
   z-index: 1100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: ${p => p.theme.display.flex};
+  justify-content: ${p => p.theme.position.center};
+  align-items: ${p => p.theme.position.center};
   min-height: 64px;
   padding-right: 24px;
   padding-left: 24px;
   padding-top: 12px;
   padding-bottom: 12px;
-  color: #fff;
+  color: ${p => p.theme.colors.white};
   background-color: ${p => p.theme.colors.blue};
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `;
 
 export const SearchForm = styled.form`
-  display: flex;
-  align-items: center;
+  display: ${p => p.theme.display.flex};
+  align-items: ${p => p.theme.position.center};
   width: 100%;
   max-width: 600px;
   background-color: ${p => p.theme.colors.white};
@@ -209,7 +208,7 @@ export const SearchFormBtnLabel = styled.span`
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
+  padding: ${p => p.theme.space[0]}px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
