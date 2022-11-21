@@ -153,10 +153,6 @@ export default class SearchResult extends Component {
     this.setState({ largeImage });
   };
 
-  // onModalOpen = () => {
-  //   this.setState({ largeImage: });
-  // };
-
   onModalClose = () => {
     this.setState({ largeImage: '' });
   };

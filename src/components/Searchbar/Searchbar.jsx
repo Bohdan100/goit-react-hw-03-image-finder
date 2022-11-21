@@ -15,7 +15,7 @@ import {
 } from './SearchResult.styled';
 
 export default class Searchbar extends Component {
-  static onSubmit = PropTypes.func.isRequired;
+  static propTypes = { onSubmit: PropTypes.func.isRequired };
 
   state = {
     searchName: '',

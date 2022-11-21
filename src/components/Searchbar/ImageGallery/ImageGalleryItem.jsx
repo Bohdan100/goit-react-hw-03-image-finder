@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import { ImageGalleryCard, Image } from '../SearchResult.styled';
 
 export class ImageGalleryItem extends Component {
-  static onClick = PropTypes.func.isRequired;
-  static largeImageURL = PropTypes.string.isRequired;
-  static tags = PropTypes.string.isRequired;
+  static propTypes = {
+    onClick: PropTypes.func.isRequired,
+    largeImageURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+  };
 
   handleClick = event => {
     event.preventDefault();

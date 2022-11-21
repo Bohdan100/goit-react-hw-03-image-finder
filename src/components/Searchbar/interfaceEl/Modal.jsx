@@ -13,8 +13,10 @@ import {
 const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
-  static onClose = PropTypes.func.isRequired;
-  static src = PropTypes.string.isRequired;
+  static propTypes = {
+    onClose: PropTypes.func.isRequired,
+    src: PropTypes.string.isRequired,
+  };
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
