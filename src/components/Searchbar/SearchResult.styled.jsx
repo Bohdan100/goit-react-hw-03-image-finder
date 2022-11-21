@@ -1,17 +1,12 @@
 import styled from 'styled-components';
-import { space, layout, color } from 'styled-system';
+import { space, layout, color, display, grid } from 'styled-system';
 // npm i styled-system styled-components
 
 // ============ ImageGalleryList ===================
 
 // ImageGalleryList = Box
-export const Box = styled.ul`
-  ${space} ${layout} ${color} 
-  display: ${p => p.theme.display.grid};
-  max-width: calc(100vw - 48px);
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  grid-gap: ${p => p.theme.space[4]}px;
-  list-style: none;
+export const Box = styled.div`
+  ${space} ${layout} ${color} ${display} ${grid}
 `;
 
 export const ImageGalleryCard = styled.li`
@@ -107,23 +102,6 @@ export const ModalFormBtn = styled.button`
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
-
-  :hover,
-  :focus {
-    opacity: 1;
-  }
-`;
-
-export const ModalFormIcon = styled.svg`
-  stroke: currentColor;
-  fill: currentColor;
-  stroke-width: 0;
-  width: 32px;
-  height: 32px;
-  xmlns: http://www.w3.org/2000/svg;
-  opacity: 0.6;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
 
   :hover,
   :focus {

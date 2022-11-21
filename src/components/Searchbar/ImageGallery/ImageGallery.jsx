@@ -1,7 +1,6 @@
 // Разметка галереи изображений по http-запросу
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { theme } from '../../constants/theme';
 
 import { ImageGalleryItem } from './ImageGalleryItem';
 import { Box } from '../SearchResult.styled';
@@ -24,9 +23,23 @@ export default class ImageGallery extends Component {
 
   render() {
     const { images } = this.props;
-    console.log('theme', theme);
+
     return (
-      <Box mt={0} mb={0} p={0} ml="auto" mr="auto" bg={theme.colors.white}>
+      // as="ul": div --> ul
+      <Box
+        display="grid"
+        gridGap={4}
+        gridTemplateColumns="repeat(auto-fill, minmax(400px, 1fr))"
+        mt={0}
+        mb={0}
+        p={0}
+        ml="auto"
+        mr="auto"
+        bg="white"
+        maxWidth="calc(100vw - 48px)"
+        list-style="none"
+        as="ul"
+      >
         {images.map(({ id, largeImageURL, tags }) => (
           <ImageGalleryItem
             key={id}
