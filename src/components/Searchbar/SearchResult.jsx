@@ -29,29 +29,6 @@ export default class SearchResult extends Component {
     largeImage: '',
   };
 
-  componentDidMount() {
-    const prevName = localStorage.getItem('SearchQuerry');
-    const prevParsedName = JSON.parse(prevName);
-
-    if (prevParsedName) {
-      this.setState({ searchName: prevParsedName });
-    }
-
-    const prevPage = localStorage.getItem('Page');
-    const prevParsedPage = JSON.parse(prevPage);
-
-    if (prevParsedPage) {
-      this.setState({ page: prevParsedPage });
-    }
-
-    const prevImages = localStorage.getItem('Images');
-    const prevParsedImages = JSON.parse(prevImages);
-
-    if (prevParsedImages) {
-      this.setState({ images: prevParsedImages, status: Status.RESOLVED });
-    }
-  }
-
   componentDidUpdate(prevProps, prevState) {
     const prevName = prevState.searchName;
     const nextName = this.state.searchName;
@@ -59,75 +36,61 @@ export default class SearchResult extends Component {
     const prevPage = prevState.page;
     const nextPage = this.state.page;
 
-    const prevImages = prevState.images;
-    const nextImages = this.state.images;
-
     if (prevName !== nextName || prevPage !== nextPage) {
+      this.setState({ status: Status.PENDING });
+
       fetchImages(nextName, nextPage)
-        .then(response => [response.hits, response.total])
-        .then(([requestImages, allImages]) => {
+        .then(([renderImages, allImages]) => {
           ///
-          if (requestImages.length === 0) {
+          if (renderImages.length === 0) {
             toast.info('🦄 No images found for your search query!');
             this.setState({ status: Status.IDLE });
           }
           ////////////////////////
           else {
             if (nextPage === 1) {
-              if (requestImages.length === allImages) {
+              if (renderImages.length === allImages) {
                 toast.success(
-                  `Only 🦄 ${requestImages.length} images found for your search query. No other images found !`
+                  `Only 🦄 ${renderImages.length} images found for your search query. No other images found !`
                 );
               }
               ///
               else {
                 toast.success(
-                  `First 🦄 ${requestImages.length} images found for your search query!`
+                  `First 🦄 ${renderImages.length} images found for your search query!`
                 );
               }
               ///
               this.setState(prevState => ({
                 ...prevState,
                 status: Status.RESOLVED,
-                images: [...requestImages],
+                images: [...renderImages],
               }));
             }
             /////////////////////////
             else {
-              if (requestImages.length === allImages) {
+              if (renderImages.length === allImages) {
                 toast.success(
-                  `🦄 You have uploaded ALL ${requestImages.length} available images for your search query. No other images found !`
+                  `🦄 You have uploaded ALL ${renderImages.length} available images for your search query. No other images found !`
                 );
               }
               ///
               else {
                 toast.success(
-                  `🦄 Next ${requestImages.length} images found for your search query!`
+                  `🦄 Next ${renderImages.length} images found for your search query!`
                 );
               }
               ///
+
               this.setState(prevState => ({
                 ...prevState,
                 status: Status.RESOLVED,
-                images: [...prevState.images, ...requestImages],
+                images: [...prevState.images, ...renderImages],
               }));
             }
           }
         })
-        .catch(error => this.setState({ error, status: Status.PENDING }));
-    }
-
-    // ============ LOCAL STORAGE ====================
-    if (nextName !== prevName) {
-      localStorage.setItem('SearchQuerry', JSON.stringify(nextName));
-    }
-
-    if (nextPage !== prevPage) {
-      localStorage.setItem('Page', JSON.stringify(nextPage));
-    }
-
-    if (nextImages !== prevImages) {
-      localStorage.setItem('Images', JSON.stringify(nextImages));
+        .catch(error => this.setState({ error, status: Status.REJECTED }));
     }
   }
 
@@ -167,9 +130,7 @@ export default class SearchResult extends Component {
         {status === Status.IDLE && (
           <IdleText>Search images and photos</IdleText>
         )}
-        {status === Status.PENDING && (
-          <Loader images={images} onClick={this.handleClickFromItem} />
-        )}
+        {status === Status.PENDING && <Loader />}
         {status === Status.REJECTED && <RequestError message={error.message} />}
         {status === Status.RESOLVED && (
           <>

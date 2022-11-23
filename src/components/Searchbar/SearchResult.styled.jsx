@@ -6,7 +6,11 @@ import { space, layout, color, display, grid } from 'styled-system';
 
 // ImageGalleryList = Box
 export const Box = styled.div`
-  ${space} ${layout} ${color} ${display} ${grid}
+  ${space}
+  ${layout} 
+  ${color} 
+  ${display} 
+  ${grid}
 `;
 
 export const ImageGalleryCard = styled.li`
@@ -173,7 +177,6 @@ export const SearchFormIcon = styled.svg`
   stroke-width: 0;
   width: 16px;
   height: 16px;
-  xmlns: http://www.w3.org/2000/svg;
   opacity: 0.6;
 
   :hover,
