@@ -1,10 +1,9 @@
 import { ThemeProvider } from 'styled-components';
-import { theme } from './components/constants/theme';
-import { GlobalStyle } from './GlobalStyle';
+import theme from 'constants';
+import GlobalStyle from 'GlobalStyle';
+import AppContainer from './App.styled';
 
-import { AppContainer } from './App.styled';
-
-import SearchResult from './components/Searchbar/SearchResult';
+import SearchResult from './components';
 
 export const App = () => {
   return (

@@ -1,4 +1,4 @@
-export const theme = {
+const theme = {
   display: {
     grid: 'grid',
     flex: 'flex',
@@ -59,3 +59,5 @@ export const theme = {
     sticky: 'sticky',
   },
 };
+
+export default theme;

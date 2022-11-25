@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
+import fetchImages from 'apiRequest';
+import {
+  renderSuccesNotification,
+  notFoundNotification,
+  informativeNotification,
+} from 'toastNotification';
 import Searchbar from './Searchbar';
-import fetchImages from './apiRequest/apiRequest';
-import ImageGallery from './ImageGallery/ImageGallery';
+import ImageGallery from './ImageGallery';
 import RequestError from './interfaceEl/RequestError';
 import Loader from './interfaceEl/Loader';
 import Button from './interfaceEl/Button';
@@ -41,53 +44,16 @@ export default class SearchResult extends Component {
 
       fetchImages(nextName, nextPage)
         .then(([renderImages, allImages]) => {
-          ///
           if (renderImages.length === 0) {
-            toast.info('🦄 No images found for your search query!');
+            notFoundNotification();
             this.setState({ status: Status.IDLE });
-          }
-          ////////////////////////
-          else {
-            if (nextPage === 1) {
-              if (renderImages.length === allImages) {
-                toast.success(
-                  `Only 🦄 ${renderImages.length} images found for your search query. No other images found !`
-                );
-              }
-              ///
-              else {
-                toast.success(
-                  `First 🦄 ${renderImages.length} images found for your search query!`
-                );
-              }
-              ///
-              this.setState(prevState => ({
-                ...prevState,
-                status: Status.RESOLVED,
-                images: [...renderImages],
-              }));
-            }
-            /////////////////////////
-            else {
-              if (renderImages.length === allImages) {
-                toast.success(
-                  `🦄 You have uploaded ALL ${renderImages.length} available images for your search query. No other images found !`
-                );
-              }
-              ///
-              else {
-                toast.success(
-                  `🦄 Next ${renderImages.length} images found for your search query!`
-                );
-              }
-              ///
-
-              this.setState(prevState => ({
-                ...prevState,
-                status: Status.RESOLVED,
-                images: [...prevState.images, ...renderImages],
-              }));
-            }
+          } else {
+            renderSuccesNotification(renderImages, allImages, nextPage);
+            this.setState(prevState => ({
+              ...prevState,
+              status: Status.RESOLVED,
+              images: [...prevState.images, ...renderImages],
+            }));
           }
         })
         .catch(error => this.setState({ error, status: Status.REJECTED }));
@@ -96,7 +62,7 @@ export default class SearchResult extends Component {
 
   handleSearchbarSubmit = newSearchName => {
     if (newSearchName === this.state.searchName) {
-      toast.info('🦄 You entered the previous search word!');
+      informativeNotification();
       return;
     }
 
@@ -104,6 +70,7 @@ export default class SearchResult extends Component {
       page: 1,
       searchName: newSearchName,
       status: Status.PENDING,
+      images: [],
     });
   };
 
