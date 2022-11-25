@@ -18,15 +18,16 @@ const renderSuccesNotification = (renderImages, allImages, nextPage) => {
   }
   /////////////////////////
   else {
-    if (renderImages.length === allImages) {
+    if (renderImages.length === 0) {
       toast.success(
-        `🦄 You have uploaded ALL ${renderImages.length} available images for your search query. No other images found !`
+        `🦄 You have uploaded ALL ${allImages} available images for your search query. No other images found !`
       );
     }
     ///
     else {
       toast.success(
-        `🦄 Next ${renderImages.length} images found for your search query!`
+        `🦄 Next ${renderImages.length} images have been uploaded according for your search query. 
+            Total search results - ${allImages} images.`
       );
     }
   }
