@@ -93,6 +93,9 @@ export default class SearchResult extends Component {
     return (
       <>
         <Searchbar onSubmit={this.handleSearchbarSubmit} />
+        {images.length > 0 && (
+          <ImageGallery images={images} onClick={this.handleClickFromItem} />
+        )}
 
         {status === Status.IDLE && (
           <IdleText>Search images and photos</IdleText>
@@ -101,7 +104,6 @@ export default class SearchResult extends Component {
         {status === Status.REJECTED && <RequestError message={error.message} />}
         {status === Status.RESOLVED && (
           <>
-            <ImageGallery images={images} onClick={this.handleClickFromItem} />
             <Button loadMore={this.loadMore} />
             {this.state.largeImage.length > 0 && (
               <Modal src={this.state.largeImage} onClose={this.onModalClose} />
